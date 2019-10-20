@@ -1,0 +1,10 @@
+#Sample Ansible playbook with var and task in separete files.
+-
+  name: Playbook include saeparatefile for variables and tasks
+  hosts: webServer
+  debugger: on_failed
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - webservers

@@ -1,0 +1,13 @@
+#Sample Ansible playbook with var and task in separete files.
+-
+  name: Playbook include saeparatefile for variables and tasks
+  hosts: target1
+  debugger: on_failed
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - variablesFile.yml
+
+  tasks:
+    - include: tasksFile.yml

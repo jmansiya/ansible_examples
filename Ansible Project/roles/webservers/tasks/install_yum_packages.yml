@@ -1,0 +1,5 @@
+---
+
+- name: Loops example
+  yum: 'name={{ item }} state=present'
+  loop: '{{ lPackages }}'

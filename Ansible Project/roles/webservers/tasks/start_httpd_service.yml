@@ -1,0 +1,12 @@
+---
+# These tasks install http and start it.
+
+  - name: Install httpd service
+    yum:
+      name: httpd
+      state: present
+
+  - name: Start web server
+    service:
+      name: httpd
+      state: started

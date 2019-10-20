@@ -1,0 +1,4 @@
+---
+
+- include: install_yum_packages.yml
+- include: start_httpd_service.yml

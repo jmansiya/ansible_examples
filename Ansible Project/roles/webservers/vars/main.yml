@@ -1,0 +1,13 @@
+node1: '11.123.22.311'
+node2: '10.5.110.10'
+lPackages:
+  - httpd
+  - binutils
+  - glibc
+  - ksh
+  - libaio
+  - libXext
+  - gcc
+  - make
+  - sysstat
+  - unixODBC

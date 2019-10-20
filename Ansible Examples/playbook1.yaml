@@ -1,0 +1,9 @@
+#Ansible ping test
+- 
+ name: Test connectivity to target servers
+ hosts: all
+ tasks:
+   - name: Ping test
+     ping:
+   - name: Command date.
+     command: date

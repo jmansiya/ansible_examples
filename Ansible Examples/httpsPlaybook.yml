@@ -1,0 +1,65 @@
+#Simple ansible playbook to install and start HTTPD.
+---
+- name: This sets up an httpd webserver
+  hosts: target1
+  debugger: on_failed
+  become: yes
+  become_user: root
+  become_method: sudo
+ 
+  vars:
+    node1: '11.123.22.311'
+    node2: '10.5.110.10'
+    lPackages:
+      - httpd
+      - binutils
+      - glibc
+      - ksh
+      - libaio
+      - libXext
+      - gcc
+      - make
+      - sysstat
+      - unixODBC
+  tasks:
+    - name: Loops example
+      yum: 'name={{ item }} state=present'
+      with_items: '{{ lPackages }}'
+
+    - name: Install httpd service
+      yum:
+        name: httpd
+        state: present
+  
+    - name: Start web server
+      service:
+        name: httpd
+        state: started
+
+    - name: Command cat.
+      command: cat resolv.conf chdir=/etc
+
+    - lineinfile:
+        path: /etc/resolv.conf
+        line: 'jmansilla {{ node1 }}'      
+
+    - lineinfile:
+        path: /etc/resolv.conf
+        line: 'lucia {{ node2 }}'      
+
+    - name: Command cat.
+      command: cat resolv.conf chdir=/etc
+    
+    - name: 'Httpd Status'
+      command: service httpd status
+      register: command_output
+
+    - name: 'Send email if httpd status is running'
+      mail:
+        to: jmansiya@gmail.com
+        subject: Alerta https is running
+        body: 'Service httpd in {{ ansible_host }} is running'
+      when: command_output.stdout.find('running') != -1
+
+    - name: 'Shell example'
+      shell: 'cat /etc/resolv.conf'
